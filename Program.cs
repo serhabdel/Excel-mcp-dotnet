@@ -1,10 +1,25 @@
-using Excel_mcp_dotnet;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ModelContextProtocol.Server;
+using Syncfusion.Licensing;
 
-// Configure logging to stderr to avoid interfering with MCP protocol on stdout
-var loggerFactory = LoggerFactory.Create(builder => 
-    builder.AddConsole(options => options.LogToStandardErrorThreshold = LogLevel.Trace));
-var logger = loggerFactory.CreateLogger<McpServer>();
+// Register your Syncfusion license key directly here
+// Replace "YOUR_LICENSE_KEY" with your actual Syncfusion license key
+SyncfusionLicenseProvider.RegisterLicense("YOUR_LICENSE_KEY");
 
-var server = new McpServer(logger);
-await server.StartAsync(args);
+var builder = Host.CreateApplicationBuilder(args);
+
+// Configure logging to stderr for MCP protocol compatibility
+builder.Logging.AddConsole(consoleLogOptions =>
+{
+    consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
+});
+
+// Add MCP server with stdio transport
+builder.Services
+    .AddMcpServer()
+    .WithStdioServerTransport()
+    .WithToolsFromAssembly();
+
+await builder.Build().RunAsync();

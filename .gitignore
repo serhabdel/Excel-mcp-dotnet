@@ -410,3 +410,9 @@ logs/
 # MCP configuration files (user-specific)
 mcp-config.json
 mcp-config-optimized.json
+
+# Application settings with sensitive information
+appsettings.json
+
+#extra
+original

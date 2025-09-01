@@ -9,10 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="7.1.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <!-- Official MCP C# SDK -->
+    <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.4" />
+    
+    <!-- Syncfusion Excel Library - UPGRADED TO 30.2.7 -->
+    <PackageReference Include="Syncfusion.XlsIO.Net" Version="30.2.7" />
+    
+    <!-- Required for MCP hosting -->
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+    
+    <!-- For HTTP operations in some tools -->
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
+    
+    <!-- For configuration management -->
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
